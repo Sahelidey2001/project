@@ -1,0 +1,17 @@
+<%- include("header"); -%>
+
+<div class="main-container">
+    <button class="home-buttons location-button" id="getLocation" type="submit">Get Location</button>
+
+    <form class="location-form" action="/" method="post">
+        <label for="latitude">Latitude:</label>
+        <input id="latitude" class="location-input" type="text" name="latitude" readonly>
+        <label for="longitude">Longitude:</label>
+        <input id="longitude" class="location-input" type="text" name="longitude" readonly>
+        <button class="home-buttons" id="final-submit" type="submit">Let's Begin</button>
+    </form>
+
+
+</div>
+
+<%- include("footer2"); -%>

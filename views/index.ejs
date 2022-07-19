@@ -1,0 +1,131 @@
+<%- include("header"); -%>
+
+<div>
+  <!-- navbar -->
+  <nav class="d-flex justify-content-between">
+    <div>
+      <h3>Daily Weather Map</h3>
+    </div>
+    <div class="current-location d-flex align-content-center">
+      <h5><%= city %> </h5>
+      <img src="/images/your-location.png" alt="" srcset="" />
+    </div>
+  </nav>
+  <!-- search bar -->
+  <div class="container">
+    <form action="/search" method="post" class="search-bar">
+      <input type="text" placeholder="SEARCH BY YOUR CITY NAME" name="search" />
+      <button class="submit" type="submit">
+        <img src="/images/search.png" alt="" srcset="" />
+      </button>
+    </form>
+  </div>
+  <!-- weather -->
+  <div
+    class="w-parent container-fluid d-flex justify-content-between flex-wrap"
+  >
+    <!-- first container -->
+    <div class="first-container w-container">
+      <div>
+        <h2><%= city %> </h2>
+      </div>
+      <div class="d-flex justify-content-between top-part">
+        <div class="d-flex temp-container">
+          <img src=<%= imageURL %>  alt="sunny" width="60px" height="54px" />
+          <h2><%= currentTemp %></h2><h6>°C</h6>
+        </div>
+        <div class="box-two">
+          <h6>Feels Like: <%= feelsLike %>°C</h6>
+          <h6>Humidity: <%= humidity %>%</h6>
+          <h6>Wind: <%= windSpeed %> km/h</h6>
+        </div>
+        <div class="box-three">
+          <h6><%= currentDay %></h6>
+          <h6>Desc: <%= description %></h6>
+          <h6>UVI: <%= uvIndex %> </h6>
+        </div>
+      </div>
+      <div class="d-flex">
+        <div id="temp-button" class="w-temp">Temperature</div>
+        <div id="wind-button" class="w-wind">Wind</div>
+      </div>
+      <div class="d-flex justify-content-between w-container-a">
+        <% forecastArray.forEach(data => { %> 
+          <div class="bg-b">
+            <h6><%= data.date %></h6> 
+            <div>
+              <img src=<%= data.image %>  width="70px" height="auto" />
+              <p class="forecast"><%= data.description %> </p>
+              <p class="temp-portion">
+                H: <%= data.maxTemp %>°<br> 
+                L: <%= data.minTemp %>°
+              </p>
+              <p class="wind-portion">
+                Hum: <%= data.humidity %>%<br> 
+                wi: <%= data.windSpeed %>km/h
+              </p>
+            </div>
+          </div> 
+        <% }); %> 
+      </div>
+    </div>
+    <!-- second container -->
+    <div class="second-container w-container">
+      <% if(s_statusCode === 200) { %> 
+        <div>
+          <h2><%= s_City %> </h2>
+        </div>
+        <div class="d-flex justify-content-between top-part">
+          <div class="d-flex temp-container">
+            <img src=<%= s_imageURL %>  alt="sunny" width="60px" height="54px" />
+            <h2><%= s_Temp %> </h2>
+            <h6>°C</h6>
+          </div>
+          <div class="box-two">
+            <h6>Feels Like: <%= s_FeelsLike %>°C</h6>
+            <h6>Humidity: <%= s_humidity %>%</h6>
+            <h6>Wind: <%= s_windSpeed %> km/h</h6>
+          </div>
+          <div class="box-three">
+            <h6><%= s_currentDay %></h6>
+            <h6>Desc: <%= s_description %></h6>
+            <h6>UVI: <%= s_uvIndex %> </h6>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div id="s-temp-button" class="s-w-temp">Temperature</div>
+          <div id="s-wind-button" class="s-w-wind">Wind</div>
+        </div>
+        <div class="d-flex justify-content-between w-container-a">
+          <% s_forecastArray.forEach(data => { %> 
+            <div class="bg-b">
+              <h6><%= data.date %></h6> 
+              <div>
+                <img src=<%= data.image %>  width="70px" height="auto" />
+                <p class="forecast"><%= data.description %> </p>
+                <p class="s-temp-portion">
+                  H: <%= data.maxTemp %>°<br> 
+                  L: <%= data.minTemp %>°
+                </p>
+                <p class="s-wind-portion">
+                  Hum: <%= data.humidity %>%<br> 
+                  wi: <%= data.windSpeed %>km/h
+                </p>
+              </div>
+            </div> 
+          <% }); %> 
+        </div>
+      <% } else { %> 
+        <h3>⚠ Please enter a valid city name to continue</h3>
+      <% } %> 
+
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>©2022 all rights reserved by Saheli Dey and Ahana Das.</p>
+</footer>
+
+<%- include("footer"); -%>
+
